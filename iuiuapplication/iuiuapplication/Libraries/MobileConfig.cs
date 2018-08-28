@@ -18,7 +18,7 @@ namespace iuiuapplication.Libraries
         public static string KampalaCampuslink = "http://196.43.182.5/mobile/";
         public static string KampalaCampusPhotolink = "http://196.43.182.7/ERP/Academics/studentimages/";
         public static string FemalesCampuslink = "http://137.63.131.2:92/Mobile/";
-        public static string FemalesCampusPhotolink = "https://137.63.131.2:83/ERP/Academics/studentimages/";
+        //public static string FemalesCampusPhotolink = "https://137.63.131.2:83/ERP/Academics/studentimages/";
 
         public static string GetWebAddress(string campus)
         {
