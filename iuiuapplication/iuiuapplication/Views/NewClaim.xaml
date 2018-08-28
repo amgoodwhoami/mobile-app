@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.NewClaim" Title="New Teaching Claim" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="ic_dots.png"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+    <StackLayout  Orientation="Vertical" Margin="10,20,10,10">
+        <Label Text="NEW CLAIM FOR 2017/2018, SEM 1" HorizontalTextAlignment="Center" x:Name="lbl_header" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" Margin="10" TextColor="Green"></Label>
+        <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+        <Frame  Margin="0,25,0,10"  HorizontalOptions="Fill" Padding="0,20,0,5" BackgroundColor="White" HasShadow="True">
+            <StackLayout Padding="5">
+                <!--<DatePicker x:Name="txtDate"   HorizontalOptions="Fill" Scale="0.9"></DatePicker>-->
+                <Picker x:Name="txtclass" Title="Select Class" Scale="0.9" HorizontalOptions="Fill"   
+                        ItemsSource="{Binding SID}" ItemDisplayBinding="{Binding duration}"></Picker>
+                <Button Text="Add Claim" HorizontalOptions="Fill" HeightRequest="60" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+                <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+    
+</ContentPage>

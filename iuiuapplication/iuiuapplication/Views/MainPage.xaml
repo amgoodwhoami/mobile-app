@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:iuiuapplication"
+             x:Class="iuiuapplication.MainPage" Title="IUIU Mobile" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ERP Login" Order="Secondary" Clicked="TapGestureRecognizer_Tapped"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Margin="0">
+        <Image Source="iuiu_home.png" x:Name="home_img" Aspect="AspectFit"
+				></Image>
+        <ScrollView Orientation="Vertical" Margin="5">
+            <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center" Orientation="Vertical">
+
+                <!--Quick Links for Call, Facebook, Twitter and Website-->
+                <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Center" Orientation="Horizontal" Margin="0">
+                    <Image Source="call.png" x:Name="call" Margin="5">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Call_Tapped" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="fb.png" x:Name="fb" x:Uid="fb" Margin="5">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FaceBook_Tapped" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="twitter.png" x:Name="twiter" Margin="5">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="web.png" x:Name="web" x:Uid="web" Margin="5">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="WebIcon_Tapped" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+
+                <!--Programmes & Faculties-->
+                <Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="courses">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped_1" />
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+                        <Image Source="searchbox.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>
+
+                <!--Academica ERP Login-->
+                <Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="academica" x:Name="academica">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+
+                        <Image Source="pic_academica.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>
+                
+                
+                <!--Student Search-->
+                <Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="courses">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="studentSearch" />
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+
+                        <Image Source="searchstudent.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>
+                <!--Graduands-->
+                <Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="courses">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="GraduationListViewer"/>
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+
+                        <Image Source="pic_graduation.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>
+                <!--Library Catalog-->
+                <Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="courses">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="OPACViewer"/>
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+                        <Image Source="pic_opac.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>
+                <!--Programmes & Faculties-->
+                <!--<Frame Margin="5" HasShadow="True" BackgroundColor="White" Padding="3,3,3,3" x:Uid="courses">
+                    <Frame.OutlineColor>
+                        <OnPlatform x:TypeArguments="Color" Android="Gray" iOS="#DCDCDC" />
+                    </Frame.OutlineColor>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="coming_soon" />
+                    </Frame.GestureRecognizers>
+                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" >
+                        <Image Source="pic_campuses.png" HorizontalOptions="CenterAndExpand" HeightRequest="80">
+                        </Image>
+                    </StackLayout>
+                </Frame>-->
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>

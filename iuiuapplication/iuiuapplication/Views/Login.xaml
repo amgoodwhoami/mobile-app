@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.Login" Title="Academica ERP Login" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="ic_dots.png"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+    <Frame  Margin="40" VerticalOptions="Center" HorizontalOptions="Fill" Padding="5,20,5,5" BackgroundColor="White" HasShadow="True">
+        <StackLayout Padding="10">
+            <Entry x:Name="txtusername" HorizontalOptions="Fill"  Placeholder="Reg Number | Staff No:" Keyboard="Default" FontSize="Small" Margin="5"></Entry>
+            <Entry x:Name="txtpassword" HorizontalOptions="Fill"  Placeholder="Password:" IsPassword="True" FontSize="Small" Margin="5"></Entry>
+            <Picker x:Name="txt_campus"  HorizontalOptions="FillAndExpand" Margin="5">
+                <Picker.Items>
+                    <x:String>Main Campus</x:String>
+                    <x:String>Kampala Campus</x:String>
+                    <x:String>Females Campus</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Text="Login" HorizontalOptions="Fill" HeightRequest="60" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+            <Label Text="Reset Password" IsVisible="False" x:Name="lbl_reset" HorizontalOptions="Center" FontAttributes="Bold" Margin="10" TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer  NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        </StackLayout>
+    </Frame>
+</ContentPage>

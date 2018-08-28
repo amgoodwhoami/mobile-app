@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.GraduantionLists" Title="Graduation Lists" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="ic_dots.png"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <!--Restaurants-->
+        
+        <StackLayout HorizontalOptions="Fill" Margin="5">
+
+            <StackLayout Margin="0" Orientation="Vertical" HorizontalOptions="Fill" Padding="0">
+                <Picker x:Name="txt_year" HorizontalOptions="Fill" Margin="0" Scale="0.9"> </Picker>
+                <Picker x:Name="txtProgramme" SelectedIndexChanged="lv_programmes_Refreshing" Title="Programme [Course]" Scale="0.9" HorizontalOptions="Fill" Margin="0"  
+                        ItemsSource="{Binding prog_id}" ItemDisplayBinding="{Binding prog_name}"></Picker>
+            </StackLayout>
+
+        </StackLayout>
+        <Frame HasShadow="True" Margin="10" Padding="0" CornerRadius="15">
+            <StackLayout Orientation="Horizontal" Margin="0">
+                <Entry x:Name="txtSearch" TextChanged="txtSearch_TextChanged" HorizontalOptions="FillAndExpand" HeightRequest="45"   Placeholder="Search..." Keyboard="Default" FontSize="15" Margin="10,0,0,0"></Entry>
+                <Image WidthRequest="25" x:Name="img_search" Source="search.png" HorizontalOptions="End" Margin="0,0,10,0"></Image>
+            </StackLayout>
+        </Frame>
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <ListView x:Name="lv_graduands" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_programmes_Refreshing">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" Margin="10">
+                            <StackLayout Margin="5" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_date" Text="{Binding stud_reg_no}" Margin="2" WidthRequest="120" TextColor="Black" FontSize="13" FontAttributes="Bold"/>
+                                    <Label x:Name="transactiontype" Text="{Binding stud_name}" Margin="2" TextColor="Black" FontSize="13"   FontAttributes="Bold"/>
+                                </StackLayout>
+                                <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_particulars" Text="{Binding gender}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="120" />
+                                    <Label x:Name="lbl_balance" Text="{Binding nationality}" Margin="2" TextColor="Black" FontSize="13"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label  Text="CAMPUS" Margin="2" TextColor="Black" FontSize="13" WidthRequest="120" />
+                                    <Label Text="{Binding campus}" Margin="2" TextColor="Black" FontAttributes="Bold" FontSize="13"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

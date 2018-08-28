@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.RegistrationHistory" Title="Registration Info" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems></ContentPage.ToolbarItems>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Horizontal" Margin="5,5,5,0" HorizontalOptions="CenterAndExpand">
+            <Label x:Name="lbl_title" Text="REGISTRATION HISTORY" Margin="10" WidthRequest="150" TextColor="Black" FontSize="13" FontAttributes="Bold" HorizontalOptions="Center"/>
+        </StackLayout>
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <ListView x:Name="lv_registration" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" Margin="10,5,10,5" Padding="7">
+                            <StackLayout Margin="0" Orientation="Vertical" Padding="5">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_academicyear" Text="{Binding AcademicYr}" Margin="5,5,5,0" WidthRequest="150" TextColor="Green" FontSize="14" FontAttributes="Bold" />
+                                    <Label x:Name="lbl_semester" Text="{Binding Sem}" Margin="5,0,5,0"  TextColor="Green" FontSize="14" FontAttributes="Bold" />
+                                </StackLayout>
+                                <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" Margin="3"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_cyear" Text="{Binding cyear}" Margin="5" TextColor="Black" FontSize="12" WidthRequest="150" />
+                                    <Label x:Name="lbl_regstatus" Text="{Binding stat_name}" Margin="5,0,5,0"  TextColor="Black" FontSize="12" FontAttributes="Bold" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_cardstatus" Text="{Binding WardenRegStatus}" Margin="5" TextColor="Black" FontSize="12" WidthRequest="150"/>
+                                    <Label x:Name="lbl_wardenstatus" Text="{Binding Clearance}" Margin="5,0,5,0"  TextColor="Black" FontSize="12" FontAttributes="Bold"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

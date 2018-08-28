@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:local="clr-namespace:NavigationMenu"
+             x:Class="iuiuapplication.Views.NavSlider">
+    <!--<ContentPage.Content>-->
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical" BackgroundColor="AntiqueWhite">
+                <StackLayout Padding="0,20,0,0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <controls:CircleImage BorderColor="White" BorderThickness="2" Source="_photo.jpg"  WidthRequest="80" HeightRequest="80" x:Name="img_nav_photo"/>
+                    <Label Text="Guest" TextColor="Green" HorizontalOptions="Center" x:Name="txt_nav_username" FontSize="12" FontAttributes="Bold" Margin="0,0,0,15"/>
+                </StackLayout>
+                
+            </StackLayout>
+            <ListView x:Name="lv_navmenu" HasUnevenRows="True" ItemTapped="lv_navmenu_ItemTapped" SeparatorVisibility="None" Margin="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="10" Grid.Row="1" Spacing="15">
+                                <StackLayout Orientation="Horizontal" x:Name="tab_home" x:Uid="tab_home">
+                                    <Image Source="{Binding menu_image}" x:Name="menu_item_icon" VerticalOptions="Start" WidthRequest="50"></Image>
+                                    <Label Text="{Binding menu_label}" x:Name="menu_item_name"  VerticalOptions="Center"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+    <!--</ContentPage.Content>-->
+</ContentPage>

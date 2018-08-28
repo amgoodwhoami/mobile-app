@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.CampusDirectory" Title="Campus Directory" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <StackLayout Padding="5">
+        <StackLayout Orientation="Horizontal" Margin="5,5,5,0" HorizontalOptions="CenterAndExpand">
+            <Label x:Name="lbl_title" Text="CAMPUS DIRECTORY" Margin="10"  TextColor="Black" FontSize="15" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Margin="5,5,5,0" HorizontalOptions="FillAndExpand">
+            <Entry x:Name="txtSearch" HorizontalOptions="Fill" WidthRequest="200" HeightRequest="50"  Placeholder="Title | Author" Keyboard="Default" FontSize="15" Margin="5"></Entry>
+            <Picker x:Name="txt_status"  HorizontalOptions="FillAndExpand" Margin="5">
+                <Picker.Items>
+                    <x:String>Staff</x:String>
+                    <x:String>Student</x:String>
+                </Picker.Items>
+            </Picker>
+        </StackLayout>
+        <Button Text="Search" HorizontalOptions="Fill" HeightRequest="50" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <ListView x:Name="lv_directory" Margin="5" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_directory_Refreshing" ItemTapped="lv_directory_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" Margin="5">
+      
+                                <StackLayout Orientation="Horizontal">
+                                <Label  Text="{Binding my_name}" Margin="2" TextColor="Black" FontSize="13"  />
+                                    <Image WidthRequest="25" Source="more_info.png" HorizontalOptions="EndAndExpand"></Image>
+                                </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

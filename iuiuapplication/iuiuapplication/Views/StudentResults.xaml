@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.StudentResults" Title="Exam Results" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="ic_dots.png"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+
+    <StackLayout HorizontalOptions="FillAndExpand">
+        <!--Restaurants-->
+        <StackLayout HorizontalOptions="Center">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Picker x:Name="txt_year"  Margin="5" Grid.Column="0" SelectedIndexChanged="txt_semester_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Year 1</x:String>
+                        <x:String>Year 2</x:String>
+                        <x:String>Year 3</x:String>
+                        <x:String>Year 4</x:String>
+                        <x:String>Year 5</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Picker x:Name="txt_semester"  Margin="5" Grid.Column="1" SelectedIndexChanged="txt_semester_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Semester 1</x:String>
+                        <x:String>Semester 2</x:String>
+                        <x:String>Semester 3</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Grid>
+        </StackLayout>
+        <Frame HasShadow="True" Margin="10" HorizontalOptions="FillAndExpand">
+            <StackLayout Margin="5,0,5,0" Orientation="Vertical" HorizontalOptions="Fill" Padding="0">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="SUMMARY" Margin="5,0,0,0" TextColor="Green" FontSize="12" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="GPA:" Margin="5" TextColor="Green" FontAttributes="Bold" />
+                    <Label x:Name="lbl_gpa" Text="0.0" Margin="5" TextColor="Green" />
+                    <Label Text="CGPA:" Margin="5" TextColor="Green" FontAttributes="Bold" />
+                    <Label x:Name="lbl_Cgpa" Text="0.0" Margin="5" TextColor="Green" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label x:Name="lbl_degclass" Text="-" Margin="5,0,0,0" TextColor="Green" FontSize="12" FontAttributes="Bold"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <Label Text="DETAILS" Margin="0" TextColor="Black" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <ListView x:Name="lv_results" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" Margin="10">
+                            <StackLayout Margin="5" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_code" Text="{Binding course_id}" Margin="5" WidthRequest="95" TextColor="Black" FontSize="12" FontAttributes="Bold"/>
+                                    <Label x:Name="lbl_coursename" Text="{Binding course_name}" Margin="5" TextColor="Black" FontSize="12" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_cu" Text="{Binding cunits}" Margin="5" TextColor="Black"/>
+                                    <Label x:Name="lbl_mark" Text="{Binding ex_mark}" Margin="5" TextColor="Black"/>
+                                    <Label x:Name="lbl_grade" Text="{Binding grade}" Margin="5" TextColor="Black"/>
+                                    <Label x:Name="lbl_gradept" Text="{Binding gradept}" Margin="5" TextColor="Black"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

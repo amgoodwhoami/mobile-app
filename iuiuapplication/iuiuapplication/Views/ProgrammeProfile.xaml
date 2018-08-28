@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.ProgrammeProfile" Title="Programme Profile" BackgroundImage="background_final.png">
+
+    <ContentPage.ToolbarItems>
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <StackLayout BackgroundColor="Transparent" Margin="5">
+                <!--<Image Source="bg.png" Aspect="AspectFill" />-->
+                    <Label Text="Welcome: Sekalema Hamza" Margin="10,40,10,10" HorizontalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" x:Name="txt_profile_progname" FontAttributes="Bold" TextColor="Green" FontSize="14"/>
+            <StackLayout Margin="15" Grid.Row="1" Spacing="10">
+                <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                <!--Academica Login-->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Code:" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="80"></Label>
+                    <Label Text="-" x:Name="txt_profile_progcode" Grid.Column="1" VerticalOptions="Center" TextColor="Black" HeightRequest="15"></Label>
+                </StackLayout>
+
+                <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                <!--Library-->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Faculty:" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="80"></Label>
+                    <Label Text="-" x:Name="txt_profile_faculty" Grid.Column="1" VerticalOptions="Center" TextColor="Black" HeightRequest="15"></Label>
+
+                </StackLayout>
+
+                <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                
+                <!--Restaurants-->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Duration :" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="80"></Label>
+                    <Label Text="-" x:Name="txt_profile_progduration" Grid.Column="1" VerticalOptions="Center" TextColor="Black" HeightRequest="20"></Label>
+
+                </StackLayout>
+
+                <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+
+                <!--Restaurants-->
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <Label Text="Requirements:"   VerticalOptions="Center" TextColor="Black" FontAttributes="Bold" ></Label>
+                    <Label Text="-" x:Name="txt_profile_requirements"   VerticalOptions="Center" TextColor="Black"  ></Label>
+
+                </StackLayout>
+
+                <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <Button Text="Apply Now" HorizontalOptions="Fill" HeightRequest="60" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

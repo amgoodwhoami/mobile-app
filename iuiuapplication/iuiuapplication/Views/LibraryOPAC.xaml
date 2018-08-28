@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.LibraryOPAC" Title="Library Catalog" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+        <StackLayout Padding="5">
+        <StackLayout Orientation="Horizontal" Margin="5,5,5,0" HorizontalOptions="FillAndExpand">
+            <Entry x:Name="txtSearch" HorizontalOptions="Fill" HeightRequest="50" WidthRequest="150"  Placeholder="Title | Author" Keyboard="Default" FontSize="15" Margin="5"></Entry>
+            <Picker x:Name="txt_campus"  HorizontalOptions="FillAndExpand" Margin="5">
+                <Picker.Items>
+                    <x:String>Main Campus</x:String>
+                    <x:String>Kampala Campus</x:String>
+                    <x:String>Females Campus</x:String>
+                </Picker.Items>
+            </Picker>
+        </StackLayout>
+        <Picker x:Name="txt_SortOrder"  HorizontalOptions="FillAndExpand" Margin="5">
+            <Picker.Items>
+                <x:String>Relevance</x:String>
+                <x:String>Recence</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Button Text="Search" HorizontalOptions="Fill" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+            <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <ListView x:Name="lv_opac" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_opac_Refreshing">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame HasShadow="True" Margin="10">
+                            <StackLayout Margin="5" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label x:Name="lbl_date" Text="{Binding resource_tittle}" Margin="2"  TextColor="Black" FontSize="13" FontAttributes="Bold"/>
+                                </StackLayout>
+                                <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label  Text="{Binding Author}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="150" />
+                                    <Label  Text="{Binding no_copies}" Margin="2" TextColor="Black" FontSize="13"/>
+                                    <Label  Text="Copies" Margin="2" TextColor="Black" FontSize="13"/>
+                                    <Image WidthRequest="25" Source="more_info.png" HorizontalOptions="EndAndExpand"></Image>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
