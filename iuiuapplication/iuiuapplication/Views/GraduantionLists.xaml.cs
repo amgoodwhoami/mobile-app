@@ -38,7 +38,7 @@ namespace iuiuapplication.Views
                 {
                     App_activity_indicator.IsVisible = true;
                     App_activity_indicator.IsRunning = true;
-                    string webaddress = Libraries.MobileConfig.GetWebAddress("Main Campus") + string.Format("DataFinder.aspx?dataFormat=allprogrammes");
+                    string webaddress = Libraries.MobileConfig.GetWebAddress("Main Campus") + string.Format("DataFinder.aspx?dataFormat=gradprogrammelist");
                     _client.Timeout = TimeSpan.Parse("00:00:15");
                     var content = await _client.GetStringAsync(webaddress);
                     MyDB DB = new MyDB();

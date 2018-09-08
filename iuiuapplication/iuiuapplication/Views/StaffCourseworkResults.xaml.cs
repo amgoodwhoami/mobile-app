@@ -22,21 +22,30 @@ namespace iuiuapplication.Views
     public partial class StaffCourseworkResults : ContentPage
     {
         private HttpClient _client = new HttpClient();
+        string campus = "Main Campus";
 
-        public StaffCourseworkResults(int ID, string cs_code, string course_nm, string sem, string yr, string acad, string prog, string sess)
+        public StaffCourseworkResults(string username, string cs_code, string course_nm, string sem, string yr, string acad, string prog, string sess,string camp)
         {
             InitializeComponent();
+            try
+            {
+                campus = camp;
+                lbl_progheader.Text = prog + "  YEAR " + yr + " " + sess;
+                lbl_csheader.Text = "SETTINGS FOR " + course_nm + "\n[" + cs_code + "]";
+                txt_compformat.SelectedIndex = 0;
+                LoadCourseworkSettings(username, cs_code, course_nm, sem, yr, acad, prog, sess);
+            }
+            catch (Exception ey) {
 
-            lbl_progheader.Text = prog + "  YEAR " + yr + " " + sess;
-            lbl_csheader.Text = "SETTINGS FOR " + course_nm + "\n[" + cs_code + "]";
-            txt_compformat.SelectedIndex = 0;
-            LoadCourseworkSettings(ID, cs_code, course_nm, sem, yr, acad, prog, sess);
-            
+                DisplayAlert("General Error!  ", "" + ey.InnerException.Message, "Ok");
+
+            }
+
 
         }
 
 
-        public async void LoadCourseworkSettings(int ID, string cs_code, string course_nm, string sem, string yr, string acad, string prog, string sess)
+        public async void LoadCourseworkSettings(string username, string cs_code, string course_nm, string sem, string yr, string acad, string prog, string sess)
         {
             try
             {
@@ -44,21 +53,14 @@ namespace iuiuapplication.Views
                 if (CrossConnectivity.Current.IsConnected)
                 {
                     //retrive the course work settings.
-
-                    string myURL = MobileConfig.
-                        KampalaCampuslink + string.
-                        Format("DataFinder.aspx?dataFormat=cwk_settings&lect_id={0}&acadyr={1}&sem={2}" +
-                        "&courseID={3}&prog={4}&session={5}&intk=-&cyr={6}", ID, acad, sem, cs_code, "-", sess, yr);
+                    string myURL = MobileConfig.GetWebAddress(campus) + string.
+                        Format("DataFinder.aspx?dataFormat=courseworksettings&empcode={0}&acad={1}&semester={2}" +
+                        "&course_id={3}&prog_id={4}&session={5}&intake=-&cyear={6}", username, acad, sem, cs_code, "-", sess, yr);
 
                     var content = await _client.GetStringAsync(myURL);
-                    Debug.WriteLine("URL ->  " + myURL);
-
                     //saving our json data locally
                     MobileConfig.set_course_work_settings(content);
-
                     setCourseWorkSettings();
-
-
                 }
                 else
                 {
@@ -68,7 +70,7 @@ namespace iuiuapplication.Views
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error huxy :  " + ex);
+                Debug.WriteLine("Error :  " + ex);
             }
 
 
@@ -142,8 +144,7 @@ namespace iuiuapplication.Views
 
 
 
-                var url = MobileConfig.
-                            KampalaCampuslink + string.
+                var url = MobileConfig.GetWebAddress(campus) + string.
                             Format("DataFinder.aspx?dataFormat=courseworksettingsEdit&acad={0}&semester={1}&course_id={2}" +
                             "&prog_id={3}&intake={4}&sess={5}&cyear={6}&assn_1={7}&assn_2={8}&assn_3={9}" +
                             "&test_1={10}&test_2={11}&noTasks={12}&finalMark={13}&CSID={14}&usn={15}" +

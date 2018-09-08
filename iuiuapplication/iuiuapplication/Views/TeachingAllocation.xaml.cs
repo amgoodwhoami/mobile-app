@@ -155,7 +155,7 @@ namespace iuiuapplication.Views
         private void lv_timetable_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             CourseAllocationModel Item = (CourseAllocationModel)e.Item;
-            Navigation.PushAsync(new StaffResultsCentre(int.Parse(Item.ID),Item.course_id,Item.course_name,Item.sem.ToString(),
+            Navigation.PushAsync(new StaffResultsCentre(Item.course_id,Item.course_name,Item.sem.ToString(),
                 Item.cyear.ToString(),Item.acad_year,Item.progname,Item.lect_session, Item.prog_id));
         }
     }

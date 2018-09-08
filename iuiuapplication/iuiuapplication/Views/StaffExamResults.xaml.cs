@@ -22,20 +22,28 @@ namespace iuiuapplication.Views
     public partial class StaffExamResults : ContentPage
     {
         private HttpClient _client = new HttpClient();
-        public StaffExamResults(int ID, string cs_code, string course_nm, string sem, string yr, string acad, string prog_id, string sess)
+        public StaffExamResults(string cs_code, string course_nm, string sem, string yr, string acad, string prog_id, string sess)
         {
             InitializeComponent();
-            lbl_progheader.Text = prog_id + "  YEAR " + yr + " " + sess;
+            try
+            {
+                lbl_progheader.Text = prog_id + "  YEAR " + yr + " " + sess;
             lbl_csheader.Text = "SETTINGS FOR " + course_nm + "\n[" + cs_code + "]";
 
-            LoadExamSettings(ID, cs_code, sem, yr, acad, prog_id, sess);
+            LoadExamSettings(Application.Current.Properties["userno"].ToString(), cs_code, sem, yr, acad, prog_id, sess);
+            }
+            catch (Exception ey)
+            {
 
+                DisplayAlert("General Error!  ", "" + ey.InnerException.Message, "Ok");
+
+            }
 
 
         }
 
 
-        public async void LoadExamSettings(int ID, string cs_code, string sem, string yr, string acad, string prog_id, string sess)
+        public async void LoadExamSettings(string username, string cs_code, string sem, string yr, string acad, string prog_id, string sess)
         {
             try
             {
@@ -45,15 +53,15 @@ namespace iuiuapplication.Views
                     //retrive the course work settings.
 
                     string myURL = MobileConfig.
-                        KampalaCampuslink + string.
-                        Format("DataFinder.aspx?dataFormat=examsettings&empcode={0}&acad={1}&semester={2}" +
-                        "&course_id={3}&prog_id={4}&sess={5}&intake=-&cyear={6}", ID, acad, sem, cs_code, prog_id, sess, yr);
+                        GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.Format("DataFinder.aspx?dataFormat=examsettings&empcode={0}&acad={1}&semester={2}" +
+                        "&course_id={3}&prog_id={4}&sess={5}&intake=-&cyear={6}", username, acad, sem, cs_code, prog_id, sess, yr);
 
-                    var content = await _client.GetStringAsync(myURL);
-                    Debug.WriteLine("URL ->  " + myURL);
-
+                    
+                   // var content = await _client.GetStringAsync(myURL);
+                    //Debug.WriteLine("URL ->  " + myURL);
+                    await DisplayAlert("General Error!  ", "" + myURL, "Ok");
                     //saving our json data locally
-                    MobileConfig.set_exam_results(content);
+                    //MobileConfig.set_exam_results(content);
 
                 }
 
@@ -144,8 +152,7 @@ namespace iuiuapplication.Views
                 string finalMark = txtTotal.Text;
                
          
-                var url = MobileConfig.
-                            KampalaCampuslink + string.
+                var url = MobileConfig.GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.
                             Format("DataFinder.aspx?dataFormat=ExamSettingsEdit&acad={0}&semester={1}&course_id={2}" +
                             "&prog_id={3}&intake={4}&sess={5}&cyear={6}&maxQ1={7}&maxQ2={8}&maxQ3={9}" +
                             "&maxQ4={10}&maxQ5={11}&maxQ6={12}&maxQ7={13}&maxQ8={14}&maxQ9={15}" +
