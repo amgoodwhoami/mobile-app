@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.FacultyRegistration" Title="Faculty Registration" BackgroundImage="background_final.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Order="Secondary" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+        <ToolbarItem Text="App Home" Order="Secondary" Clicked="ToolbarItem_Clicked_1"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="15" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Label Text="STATUS: UNREGISTERED" x:Name="lbl_currentStat" HorizontalOptions="Center" FontAttributes="Bold" Margin="20" TextColor="Red" FontSize="Large"/>
+            <Label Text="CONNECTION ERROR DETECTED" x:Name="lbl_regcomment" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="20" TextColor="Green"/>
+            <Button Text="Register Now" x:Name="cmdRegister" HorizontalOptions="Fill" HeightRequest="60" WidthRequest="200" BackgroundColor="Green" TextColor="White" Clicked="Button_Clicked" Margin="5"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

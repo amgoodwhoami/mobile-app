@@ -90,6 +90,9 @@
     <Compile Include="Views\DirectoryProfile.xaml.cs">
       <DependentUpon>DirectoryProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FacultyRegistration.xaml.cs">
+      <DependentUpon>FacultyRegistration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FeesPaymentInfo.xaml.cs">
       <DependentUpon>FeesPaymentInfo.xaml</DependentUpon>
     </Compile>
@@ -448,6 +451,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RegisterRetakes.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FacultyRegistration.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -98,5 +98,28 @@ namespace iuiuapplication.Views
                 //DisplayAlert("Error ", "Error! " + ex.Message, "OK");
             }
         }
+
+        private async void lv_registration_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Model.RegistrationModel studReg = (Model.RegistrationModel)e.Item;
+           
+            if(studReg.stat_name=="UNREGISTERED")
+            {
+                var official = await DisplayActionSheet("Self Registration", "Cancel", "", "Faculty Registration", "Register Course Units");
+                if (official == "Register Course Units")
+                {
+                    await Navigation.PushAsync(new RegisterCourseUnits());
+                }
+                else
+                {
+                    await Navigation.PushModalAsync(new FacultyRegistration(studReg.AcademicYr, studReg.Sem));
+                }
+            }
+            else
+            {
+                var official = DisplayActionSheet("Course Unit Management", "Close", "", "View Course Units");
+
+            }
+        }
     }
 }

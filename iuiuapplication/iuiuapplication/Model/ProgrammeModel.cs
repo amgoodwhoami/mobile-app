@@ -15,5 +15,8 @@ namespace iuiuapplication.Model
         public string requirements { get; set; }
         public string prog_level { get; set; }
         public string CourseLength { get; set; }
+        public string level_name { get; set; }
+
+        
     }
 }

@@ -21,12 +21,13 @@ namespace iuiuapplication.Views
         public ProgrammeInformation()
         {
             InitializeComponent();
+            txt_level.SelectedItem = "BACHELORS";
 
         }
 
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Search();
+           await Search();
         }
 
         protected async Task RefreshProgrammes()
@@ -36,21 +37,19 @@ namespace iuiuapplication.Views
 
                 try
                 {
-                    App_activity_indicator.IsVisible = true;
-                    App_activity_indicator.IsRunning = true;
+                    //App_activity_indicator.IsVisible = true;
+                    //App_activity_indicator.IsRunning = true;
                     string webaddress = Libraries.MobileConfig.GetWebAddress("Main Campus") + string.Format("DataFinder.aspx?dataFormat=allprogrammes");
                     var content = await _client.GetStringAsync(webaddress);
                     //await DisplayAlert("IUIU Mobile ", "Accessing Web Location: " + content, "OK");
-                    MyDB DB = new MyDB();
                     var n = JsonConvert.DeserializeObject<List<Model.ProgrammeModel>>(content);
                     List<Model.ProgrammeModel> prog_data = new List<Model.ProgrammeModel>(n);
                     if (prog_data.Count>0)
                     {
                         //await DisplayAlert("IUIU Mobile ", "Accessing Web Location: " + content, "OK");
                         // 
-                        
-                        DB.resetProgrammes();
-                        DB.AddProgrammes(content);
+
+                        Application.Current.Properties["prog_json"] = content;
 
                     }
                     else
@@ -72,69 +71,63 @@ namespace iuiuapplication.Views
             }
             else
             {
-                await DisplayAlert("IUIU Mobile ", "No Connection. Saved Data will be used", "OK");
+                //await DisplayAlert("IUIU Mobile ", "No Connection. Saved Data will be used", "OK");
             }
         }
 
         protected async override void OnAppearing()
         {
+            await Search();
             await RefreshProgrammes();
-            DisplayResults();
             base.OnAppearing();
         }
 
-        void DisplayResults()
+        
+
+        async Task Search()
         {
+            List<Model.ProgrammeModel> programme_data=null;
+            string level = "U";
             try
             {
-                
-                MyDB db = new MyDB();
-                var n = JsonConvert.DeserializeObject<List<Model.ProgrammeModel>>(db.GetAllProgrammes());
-                List<Model.ProgrammeModel> programme_data = new List<Model.ProgrammeModel>(n);
-                lv_programmes.ItemsSource = programme_data;
                
-                
-            }
-            catch (Exception ex)
-            {
-                DisplayAlert("Error ", "Error! " + ex.Message, "OK");
-            }
-        }
-
-        void Search()
-        {
-            try
-            {
-                MyDB db = new MyDB();
-                var n = JsonConvert.DeserializeObject<List<Model.ProgrammeModel>>(db.GetAllProgrammes());
-                List<Model.ProgrammeModel> programme_data = new List<Model.ProgrammeModel>(n);
-
+                var n = JsonConvert.DeserializeObject<List<Model.ProgrammeModel>>(Application.Current.Properties["prog_json"].ToString());
+                programme_data = new List<Model.ProgrammeModel>(n);
                 string searchText = txtSearchText.Text;
+                
+                //if (txt_level.SelectedItem.ToString() == "UNDER GRADUATE") level = "U"; else if (txt_level.SelectedItem.ToString() == "GRADUATE") level = "P";
+               // else if (txt_level.SelectedItem.ToString() == "DIPLOMA") level = "D"; else level = "C";
+
+
                 List<Model.ProgrammeModel> filteredList = programme_data;
-                if (searchText.Length > 1)
+                if (searchText.Length > 0)
                 {
                     //img_search.Source = "clear.png";
-                    filteredList = programme_data.Where(c => c.prog_name.Contains(searchText.ToUpper())).ToList();
+                    filteredList = programme_data.Where(c => (c.prog_name.Contains(searchText.ToUpper())) && c.level_name.Contains(txt_level.SelectedItem.ToString())).ToList();
                     lv_programmes.ItemsSource = filteredList;
                 }
                 else
                 {
                     //img_search.Source = "search.png";
-                    lv_programmes.ItemsSource = programme_data;
+                    lv_programmes.ItemsSource = programme_data.Where(c => c.level_name.Contains(txt_level.SelectedItem.ToString())).ToList();
                 }
 
 
             }
             catch (Exception ex)
             {
-                //DisplayAlert("Error ", "Error! " + ex.Message, "OK");
+                try
+                {
+                    lv_programmes.ItemsSource = programme_data.Where(c => c.level_name.Contains(txt_level.SelectedItem.ToString())).ToList();
+                }
+                catch (Exception) { }
+                //await DisplayAlert("Error ", "Error! " + ex.Message, "OK");
             }
         }
 
         private async void lv_programmes_Refreshing(object sender, EventArgs e)
         {
-            await RefreshProgrammes();
-            DisplayResults();
+            await Search();
             lv_programmes.EndRefresh();
         }
 

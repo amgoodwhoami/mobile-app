@@ -9,7 +9,7 @@
             <Label x:Name="lbl_title" Text="REGISTRATION HISTORY" Margin="10" WidthRequest="150" TextColor="Black" FontSize="13" FontAttributes="Bold" HorizontalOptions="Center"/>
         </StackLayout>
         <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
-        <ListView x:Name="lv_registration" HasUnevenRows="True" SeparatorVisibility="None">
+        <ListView x:Name="lv_registration" HasUnevenRows="True" SeparatorVisibility="None" ItemTapped="lv_registration_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -28,7 +28,11 @@
                                     <Label x:Name="lbl_cardstatus" Text="{Binding WardenRegStatus}" Margin="5" TextColor="Black" FontSize="12" WidthRequest="150"/>
                                     <Label x:Name="lbl_wardenstatus" Text="{Binding Clearance}" Margin="5,0,5,0"  TextColor="Black" FontSize="12" FontAttributes="Bold"/>
                                 </StackLayout>
-
+                                <Frame HasShadow="True" Margin="0" Padding="0" BackgroundColor="Green">
+                                    <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="CenterAndExpand">
+                                        <Label  Text="REGISTRATION AND COURSES" Margin="10"  TextColor="White" FontSize="Small" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
                         </Frame>
 

@@ -47,27 +47,27 @@ namespace iuiuapplication.Views
             {
                 myList.FlowItemsSource = new List<MenuItemModel>
             {
-                new MenuItemModel("thumb_results.png","My Results"),
-                new MenuItemModel("thumb_register.png","My Registration"),
-                new MenuItemModel("thumb_feespay.png","Fees Payments"),
-                new MenuItemModel("thumb_timetables.png","My Timetables"),
-                new MenuItemModel("thumb_coursematerial.png","Course Materials"),
-                new MenuItemModel("thumb_directory.png","Campus Directory"),
-                new MenuItemModel("thumb_lib_profile.png","Library Profile"),
-                new MenuItemModel("thumb_mob_opac.png","Library Catalog")
+                    new MenuItemModel("thumb_notifications.png","Notifications"),
+                    new MenuItemModel("thumb_results.png","My Results"),
+                    new MenuItemModel("thumb_register.png","My Registration"),
+                    new MenuItemModel("thumb_feespay.png","Fees Payments"),
+                    new MenuItemModel("thumb_timetables.png","My Timetables"),
+                    new MenuItemModel("thumb_coursematerial.png","Course Materials"),
+                    new MenuItemModel("thumb_directory.png","Campus Directory"),
+                    new MenuItemModel("thumb_mob_opac.png","Library Catalog")
             };
             }
             else
             {
                 myList.FlowItemsSource = new List<MenuItemModel>
             {
+                new MenuItemModel("thumb_notifications.png","Notifications"),
                 new MenuItemModel("thumb_feespay.png","Salary Info"),
                 new MenuItemModel("thumb_timetables.png","My Timetables"),
                 new MenuItemModel("thumb_results.png","Results Centre"),
                 new MenuItemModel("thumb_coursematerial.png","Course Materials"),
                 new MenuItemModel("thumb_directory.png","Campus Directory"),
                 new MenuItemModel("thumb_financials.png","My Claims"),
-                new MenuItemModel("thumb_lib_profile.png","Library Profile"),
                 new MenuItemModel("thumb_mob_opac.png","Library Catalog")
             };
 
