@@ -81,7 +81,7 @@ namespace iuiuapplication.Views
 
         protected override bool OnBackButtonPressed()
         {
-           // Navigation.PopToRootAsync();
+            Navigation.PushAsync(new Login("Back"));
             return base.OnBackButtonPressed();
         }
 

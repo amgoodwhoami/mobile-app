@@ -74,7 +74,7 @@ namespace iuiuapplication.Views
             Model.MenuItemModel item = (Model.MenuItemModel)e.Item;
             if(item.menu_label== "Academica ERP")
             { 
-                await ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).Navigation.PushAsync(new Login());
+                await ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).Navigation.PushAsync(new Login("New"));
                 (App.Current.MainPage as MasterDetailPage).IsPresented = false;
             }
             else if (item.menu_label == "Library Catalog")

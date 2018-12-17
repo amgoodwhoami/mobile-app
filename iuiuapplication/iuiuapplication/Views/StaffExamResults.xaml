@@ -92,7 +92,7 @@
                             <TapGestureRecognizer Tapped="onSaveChangesTapped" NumberOfTapsRequired="1" />
                         </Frame.GestureRecognizers>
                         <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="CenterAndExpand">
-                            <Label  Text="SAVE CHANGES" Margin="15" HeightRequest="20" TextColor="White" FontSize="13" FontAttributes="Bold"/>
+                            <Label  Text="SAVE" Margin="5" HeightRequest="25" TextColor="White" FontSize="Small" FontAttributes="Bold"/>
                         </StackLayout>
                     </Frame>
                     <Frame HasShadow="True" Margin="0" Padding="5" BackgroundColor="Green">
@@ -100,7 +100,7 @@
                             <TapGestureRecognizer Tapped="onViewResultsSheet" NumberOfTapsRequired="1" />
                         </Frame.GestureRecognizers>
                         <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="CenterAndExpand">
-                            <Label  Text="VIEW RESULTS SHEET" Margin="15" HeightRequest="20"  TextColor="White" FontSize="13" FontAttributes="Bold"/>
+                            <Label  Text="RESULTS SHEET" Margin="5" HeightRequest="25"  TextColor="White" FontSize="Small" FontAttributes="Bold"/>
                         </StackLayout>
                     </Frame>
                 </StackLayout>

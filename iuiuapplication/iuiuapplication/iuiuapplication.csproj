@@ -43,6 +43,7 @@
     <Compile Include="Model\CourseAllocationString.cs" />
     <Compile Include="Model\CourseworkStringModel.cs" />
     <Compile Include="Model\CourseworkSettings.cs" />
+    <Compile Include="Model\CourseworkViewResultsModel.cs" />
     <Compile Include="Model\DirectoryModel.cs" />
     <Compile Include="Model\Examresultssettings.cs" />
     <Compile Include="Model\ExamViewResultsModel.cs" />
@@ -83,6 +84,9 @@
     </Compile>
     <Compile Include="Views\CourseWorkResults.xaml.cs">
       <DependentUpon>CourseWorkResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourseworkResultSheet.xaml.cs">
+      <DependentUpon>CourseworkResultSheet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExamViewSheet.xaml.cs">
       <DependentUpon>ExamViewSheet.xaml</DependentUpon>
@@ -457,6 +461,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\FacultyRegistration.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CourseworkResultSheet.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -15,17 +15,15 @@ using Xamarin.Forms.Xaml;
 namespace iuiuapplication.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExamViewSheet : ContentPage
+    public partial class CourseworkResultSheet : ContentPage
     {
+        int CSID;
         private HttpClient _client = new HttpClient();
-        public ExamViewSheet()
+        public CourseworkResultSheet(int csid)
         {
             InitializeComponent();
-            txt_status.SelectedIndex = 0;
-            txt_stream.SelectedIndex = 0;
-         }
-
-
+            CSID = csid;
+        }
         protected async Task RefreshResults()
         {
             try
@@ -33,8 +31,6 @@ namespace iuiuapplication.Views
                 if (CrossConnectivity.Current.IsConnected)
                 {
 
-                    string exid = MobileConfig.get_exam_settings_id();
-                    string examstat = txt_status.SelectedItem.ToString();
                     string stream = txt_stream.SelectedItem.ToString();
                     //await DisplayAlert("EXID ", exid, "OK");
                     try
@@ -42,17 +38,16 @@ namespace iuiuapplication.Views
                         App_activity_indicator.IsVisible = true;
                         App_activity_indicator.IsRunning = true;
                         string webaddress = MobileConfig.GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.
-                            Format("DataFinder.aspx?dataFormat=examresults&EXID={0}&examStat={1}&stream={2}",
-                           exid, examstat, stream);
+                            Format("DataFinder.aspx?dataFormat=courseworkresults&CSID={0}", CSID);
                         var content = await _client.GetStringAsync(webaddress);
 
-                       // Debug.WriteLine("Exam Results DATA -> ", content);
+                        // Debug.WriteLine("Exam Results DATA -> ", content);
                         //await DisplayAlert("Content! ", content, "OK");
 
                         if (content != "[]")
                         {
                             // save the data locally.
-                           
+
                             MobileConfig.save_exam_results_sheet(content);
                             App_activity_indicator.IsRunning = false;
                             DisplayResults();
@@ -61,7 +56,7 @@ namespace iuiuapplication.Views
                         else
                         {
 
-                           await DisplayAlert("Content Error! ", "No Results Found", "OK");
+                            await DisplayAlert("Content Error! ", "No Results Found", "OK");
                         }
                         App_activity_indicator.IsVisible = false;
                         App_activity_indicator.IsRunning = false;
@@ -89,9 +84,9 @@ namespace iuiuapplication.Views
             }
         }
 
-         protected async override void OnAppearing()
+        protected async override void OnAppearing()
         {
-           await RefreshResults();
+            await RefreshResults();
             DisplayResults();
             base.OnAppearing();
         }
@@ -110,14 +105,14 @@ namespace iuiuapplication.Views
             }
             catch (Exception)
             {
-               
+
             }
         }
 
         private async void lv_view_students_Refreshing(object sender, EventArgs e)
         {
             await RefreshResults();
-            
+
             App_activity_indicator.IsVisible = false;
             App_activity_indicator.IsRunning = false;
         }
@@ -147,7 +142,7 @@ namespace iuiuapplication.Views
                 filteredList = exams_data.Where(c => c.stud_name.Contains(searchText.ToUpper()) || c.stud_reg_no.Contains(searchText.ToUpper())).ToList();
                 lv_view_students.ItemsSource = filteredList;
 
-               }
+            }
             catch (Exception)
             {
                 //lv_view_students.ItemsSource = null;

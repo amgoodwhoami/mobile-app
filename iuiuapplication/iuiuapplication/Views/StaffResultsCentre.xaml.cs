@@ -17,7 +17,7 @@ namespace iuiuapplication.Views
         {
             InitializeComponent();
             string campus = Application.Current.Properties["campus"].ToString();
-            this.Children.Add(new StaffCourseworkResults(Application.Current.Properties["userno"].ToString(), cs_code, course_nm, sem, yr,acad,prog,sess,campus));
+            this.Children.Add(new StaffCourseworkResults(Application.Current.Properties["userno"].ToString(), cs_code, course_nm, sem, yr,acad,prog,sess,campus,prog_id));
             this.Children.Add(new StaffExamResults(cs_code, course_nm, sem, yr, acad, prog_id, sess));
         }
     }

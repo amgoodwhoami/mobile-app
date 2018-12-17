@@ -18,10 +18,12 @@ namespace iuiuapplication.Views
     public partial class Login : ContentPage
     {
         private HttpClient _client = new HttpClient();
+        string stat = "Back";
 
-        public Login()
+        public Login(string status)
         {
             InitializeComponent();
+            stat = status;
             txt_campus.SelectedIndex = 0;
             
 
@@ -143,12 +145,17 @@ namespace iuiuapplication.Views
         {
             try
             {
-                if (Application.Current.Properties["userno"].ToString().Length > 1)
+                if (stat=="Back")
                 {
-                    //await Navigation.PopAsync();
+                    await Navigation.PopToRootAsync();
+                }
+                else if (Application.Current.Properties["userno"].ToString().Length > 1)
+                {
+                    
                     await Navigation.PushAsync(new UserProfile(Application.Current.Properties["campus"].ToString(), Application.Current.Properties["username"].ToString(),
                     Application.Current.Properties["phone"].ToString(), Application.Current.Properties["email"].ToString(), Application.Current.Properties["userno"].ToString(),
                         Application.Current.Properties["role"].ToString()));
+                    //
                 }
             }
             catch (Exception) { }

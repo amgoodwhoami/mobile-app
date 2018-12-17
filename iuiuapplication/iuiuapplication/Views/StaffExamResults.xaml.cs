@@ -54,14 +54,14 @@ namespace iuiuapplication.Views
 
                     string myURL = MobileConfig.
                         GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.Format("DataFinder.aspx?dataFormat=examsettings&empcode={0}&acad={1}&semester={2}" +
-                        "&course_id={3}&prog_id={4}&sess={5}&intake=-&cyear={6}", username, acad, sem, cs_code, prog_id, sess, yr);
+                        "&course_id={3}&prog_id={4}&session={5}&intake=-&cyear={6}", username, acad, sem, cs_code, prog_id, sess, yr);
 
                     
-                   // var content = await _client.GetStringAsync(myURL);
+                   var content = await _client.GetStringAsync(myURL);
                     //Debug.WriteLine("URL ->  " + myURL);
-                    await DisplayAlert("General Error!  ", "" + myURL, "Ok");
+                    //await DisplayAlert("General Error!  ", "" + myURL, "Ok");
                     //saving our json data locally
-                    //MobileConfig.set_exam_results(content);
+                    MobileConfig.set_exam_results(content);
 
                 }
 

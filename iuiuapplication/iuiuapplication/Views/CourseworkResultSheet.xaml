@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Exams Results Sheet"
-             x:Class="iuiuapplication.Views.ExamViewSheet">
-
+             x:Class="iuiuapplication.Views.CourseworkResultSheet">
     <StackLayout Orientation="Vertical" >
         <Frame  HasShadow="True" Margin="10">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <StackLayout Orientation="Vertical">
                     <Label Text="STREAM" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
-                    <Picker x:Name="txt_stream"  HorizontalOptions="FillAndExpand" SelectedIndexChanged="onChangeStream">
+                    <Picker x:Name="txt_stream"  HorizontalOptions="EndAndExpand" SelectedIndexChanged="onChangeStream">
                         <Picker.Items>
                             <x:String>-</x:String>
                             <x:String>A</x:String>
@@ -17,18 +14,6 @@
                         </Picker.Items>
                     </Picker>
                 </StackLayout>
-                <StackLayout Orientation="Vertical">
-                    <Label Text="STATUS" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
-                    <Picker x:Name="txt_status"  HorizontalOptions="FillAndExpand" SelectedIndexChanged="onChangeStatus" >
-                        <Picker.Items>
-                            <x:String>Regular</x:String>
-                            <x:String>Corrections</x:String>
-                            <x:String>Summations</x:String>
-                            <x:String>2nd Summations</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </StackLayout>
-            </StackLayout>
         </Frame>
         <SearchBar Placeholder="Search..." TextChanged="txtSearch_TextChanged" x:Name="txtSearch" Margin="5,0,5,0"></SearchBar>
 

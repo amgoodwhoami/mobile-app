@@ -38,7 +38,7 @@ namespace iuiuapplication
         async private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
 
-           await Navigation.PushAsync(new Login());
+           await Navigation.PushAsync(new Login("New"));
         }
 
         async private void WebIcon_Tapped(object sender, EventArgs e)
