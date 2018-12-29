@@ -5,8 +5,15 @@
              x:Class="iuiuapplication.Views.ExamViewSheet">
 
     <StackLayout Orientation="Vertical" >
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="MARKSHEET FOR MOBILE COMPUTING" FontAttributes="Bold" HorizontalTextAlignment="Center"  VerticalOptions="Center" TextColor="Black"
+                    x:Name="lbl_header" Margin="10"></Label>
+
+        </StackLayout>
         <Frame  HasShadow="True" Margin="10">
+           
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                
                 <StackLayout Orientation="Vertical">
                     <Label Text="STREAM" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
                     <Picker x:Name="txt_stream"  HorizontalOptions="FillAndExpand" SelectedIndexChanged="onChangeStream">
@@ -33,7 +40,7 @@
         <SearchBar Placeholder="Search..." TextChanged="txtSearch_TextChanged" x:Name="txtSearch" Margin="5,0,5,0"></SearchBar>
 
         <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
-        <ListView x:Name="lv_view_students" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_view_students_Refreshing">
+        <ListView x:Name="lv_view_students" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_view_students_Refreshing" ItemTapped="lv_view_students_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -79,34 +86,24 @@
                                 <StackLayout Orientation="Horizontal">
 
                                     <Label  Text="Course Work:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding CWMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="{Binding CWMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="40"/>
                                     <Label  Text="Exam Mark:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding examMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="{Binding examMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="40"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label  Text="Exam Total:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding totalMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="{Binding totalMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="40"/>
                                     <Label  Text="Grand Total:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding grandTotal}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="{Binding grandTotal}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="40"/>
                                 </StackLayout>
 
                                 <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
 
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Stream:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding stud_stream}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Comment:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding ExamComments}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
                                     <Label  Text="Student Status:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
                                     <Label  Text="{Binding studStatus}" Margin="2" TextColor="Black" FontSize="13" HorizontalOptions="EndAndExpand" />
-
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Exam Status:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold" />
-                                    <Label  Text="{Binding ExamStatus}" Margin="2" TextColor="Black" FontSize="13" HorizontalOptions="EndAndExpand" />
-                                </StackLayout>
+                               
                                 <StackLayout>
 
                                 </StackLayout>

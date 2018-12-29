@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              Title="Coursework Resultsheet" BackgroundImage="background_final.png"
              x:Class="iuiuapplication.Views.CourseworkResultSheet">
     <StackLayout Orientation="Vertical" >
+        <Label Text="MARKSHEET FOR MOBILE COMPUTING" FontAttributes="Bold" HorizontalTextAlignment="Center"  VerticalOptions="Center" TextColor="Black"  x:Name="lbl_header" Margin="10"></Label>
         <Frame  HasShadow="True" Margin="10">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="STREAM" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
+                <Label Text="STREAM" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
                     <Picker x:Name="txt_stream"  HorizontalOptions="EndAndExpand" SelectedIndexChanged="onChangeStream">
                         <Picker.Items>
                             <x:String>-</x:String>
@@ -15,10 +17,10 @@
                     </Picker>
                 </StackLayout>
         </Frame>
-        <SearchBar Placeholder="Search..." TextChanged="txtSearch_TextChanged" x:Name="txtSearch" Margin="5,0,5,0"></SearchBar>
+        <SearchBar Placeholder="Search..." TextChanged="txtSearch_TextChanged" x:Name="txtSearch" Margin="5,0,5,0" ></SearchBar>
 
         <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
-        <ListView x:Name="lv_view_students" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_view_students_Refreshing">
+        <ListView x:Name="lv_view_students" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_view_students_Refreshing" ItemTapped="lv_view_students_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -30,68 +32,32 @@
                                 </StackLayout>
                                 <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Q1" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q1Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Q2" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q2Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="ASSN 1" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding cw1}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="ASSN 2" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding cw2}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Q3" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q3Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Q4" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q4Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="ASSN 3" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding cw3}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Q5" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q5Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Q6" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q6Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="TEST 1" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding cw4}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="TEST 2" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding cw5}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
                                 </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Q7" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q7Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Q8" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q8Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Q9" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q9Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Q10" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding Q10Mark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                </StackLayout>
+                                
                                 <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
 
                                 <StackLayout Orientation="Horizontal">
-
-                                    <Label  Text="Course Work:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding CWMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Exam Mark:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding examMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Exam Total:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding totalMark}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Grand Total:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding grandTotal}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
+                                    <Label  Text="Grand Total:" Margin="2" TextColor="Red" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
+                                    <Label  Text="{Binding totalMark}" Margin="2" TextColor="Red" FontSize="13" WidthRequest="40" FontAttributes="Bold" HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
 
                                 <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Stream:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding stud_stream}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                    <Label  Text="Comment:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding ExamComments}" Margin="2" TextColor="Black" FontSize="13" WidthRequest="20"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Student Status:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold"/>
-                                    <Label  Text="{Binding studStatus}" Margin="2" TextColor="Black" FontSize="13" HorizontalOptions="EndAndExpand" />
-
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label  Text="Exam Status:" Margin="2" TextColor="Black" FontSize="13" WidthRequest="100" FontAttributes="Bold" />
-                                    <Label  Text="{Binding ExamStatus}" Margin="2" TextColor="Black" FontSize="13" HorizontalOptions="EndAndExpand" />
-                                </StackLayout>
+                                
                                 <StackLayout>
 
                                 </StackLayout>

@@ -17,12 +17,16 @@ namespace iuiuapplication.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CourseworkResultSheet : ContentPage
     {
-        int CSID;
+    
         private HttpClient _client = new HttpClient();
-        public CourseworkResultSheet(int csid)
+        public CourseworkResultSheet(int _csid,string headerText)
         {
             InitializeComponent();
-            CSID = csid;
+            MobileConfig.save_coursework_settings_id("" + _csid);
+            txt_stream.SelectedIndex = 0;
+            lbl_header.Text = headerText;
+
+
         }
         protected async Task RefreshResults()
         {
@@ -32,30 +36,23 @@ namespace iuiuapplication.Views
                 {
 
                     string stream = txt_stream.SelectedItem.ToString();
-                    //await DisplayAlert("EXID ", exid, "OK");
+                    //await DisplayAlert("CSID ", "CSID="+CSID, "OK");
                     try
                     {
                         App_activity_indicator.IsVisible = true;
                         App_activity_indicator.IsRunning = true;
                         string webaddress = MobileConfig.GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.
-                            Format("DataFinder.aspx?dataFormat=courseworkresults&CSID={0}", CSID);
+                            Format("DataFinder.aspx?dataFormat=courseworkresults&CSID={0}&stream={1}", MobileConfig.get_coursework_settings_id(), stream);
                         var content = await _client.GetStringAsync(webaddress);
-
-                        // Debug.WriteLine("Exam Results DATA -> ", content);
-                        //await DisplayAlert("Content! ", content, "OK");
-
+                        //await DisplayAlert("Content", "CSID=" + MobileConfig.get_coursework_settings_id(), "OK");
                         if (content != "[]")
                         {
-                            // save the data locally.
-
-                            MobileConfig.save_exam_results_sheet(content);
+                            MobileConfig.save_coursework_results_sheet(content);
                             App_activity_indicator.IsRunning = false;
                             DisplayResults();
-
                         }
                         else
                         {
-
                             await DisplayAlert("Content Error! ", "No Results Found", "OK");
                         }
                         App_activity_indicator.IsVisible = false;
@@ -72,7 +69,7 @@ namespace iuiuapplication.Views
                 }
                 else
                 {
-
+                    await DisplayAlert("Error! ", "No Internet Connection", "OK");
                 }
             }
             catch (Exception e)
@@ -82,12 +79,12 @@ namespace iuiuapplication.Views
                 await DisplayAlert("Final Error! ", e.Message, "OK");
                 DisplayResults();
             }
+            DisplayResults();
         }
 
         protected async override void OnAppearing()
         {
             await RefreshResults();
-            DisplayResults();
             base.OnAppearing();
         }
 
@@ -97,15 +94,15 @@ namespace iuiuapplication.Views
         {
             try
             {
-                //DisplayAlert("Stored Data", MobileConfig.get_exam_results_sheet(), "OK");
-                var n = JsonConvert.DeserializeObject<List<Model.ExamViewResultsModel>>(MobileConfig.get_exam_results_sheet());
-                List<Model.ExamViewResultsModel> exams_data = new List<Model.ExamViewResultsModel>(n);
-                //DisplayAlert("Stored Data", ""+n.Count, "OK");
-                lv_view_students.ItemsSource = exams_data;
+                
+                var n = JsonConvert.DeserializeObject<List<Model.CourseworkViewResultsModel>>(MobileConfig.get_coursework_results_sheet());
+                List<Model.CourseworkViewResultsModel> coursework_data = new List<Model.CourseworkViewResultsModel>(n);
+                //DisplayAlert("Stored Data","No Records: "+ coursework_data.Count, "OK");
+                lv_view_students.ItemsSource = coursework_data;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                DisplayAlert("Stored Data", "Error! : " + ex.Message, "OK");
             }
         }
 
@@ -135,11 +132,11 @@ namespace iuiuapplication.Views
         {
             try
             {
-                var n = JsonConvert.DeserializeObject<List<Model.ExamViewResultsModel>>(MobileConfig.get_exam_results_sheet());
-                List<Model.ExamViewResultsModel> exams_data = new List<Model.ExamViewResultsModel>(n);
+                var n = JsonConvert.DeserializeObject<List<Model.CourseworkViewResultsModel>>(MobileConfig.get_exam_results_sheet());
+                List<Model.CourseworkViewResultsModel> coursework_data = new List<Model.CourseworkViewResultsModel>(n);
                 string searchText = txtSearch.Text;
-                List<Model.ExamViewResultsModel> filteredList = exams_data;
-                filteredList = exams_data.Where(c => c.stud_name.Contains(searchText.ToUpper()) || c.stud_reg_no.Contains(searchText.ToUpper())).ToList();
+                List<Model.CourseworkViewResultsModel> filteredList = coursework_data;
+                filteredList = coursework_data.Where(c => c.stud_name.Contains(searchText.ToUpper()) || c.stud_reg_no.Contains(searchText.ToUpper())).ToList();
                 lv_view_students.ItemsSource = filteredList;
 
             }
@@ -148,6 +145,13 @@ namespace iuiuapplication.Views
                 //lv_view_students.ItemsSource = null;
                 DisplayAlert("Display Error ", "Error! Try again", "OK");
             }
+        }
+
+        private void lv_view_students_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Model.CourseworkViewResultsModel cs = (Model.CourseworkViewResultsModel)e.Item;
+            Navigation.PushAsync(new CourseWorkUpdates(cs.cw1, cs.cw2, cs.cw3, cs.cw4, cs.cw5, string.Format("COURSEWORK FOR {0} \n[{1}]", cs.stud_name, cs.stud_reg_no),
+                cs.cs_resultsID));
         }
     }
 }

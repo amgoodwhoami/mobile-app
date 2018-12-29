@@ -18,11 +18,12 @@ namespace iuiuapplication.Views
     public partial class ExamViewSheet : ContentPage
     {
         private HttpClient _client = new HttpClient();
-        public ExamViewSheet()
+        public ExamViewSheet(string header)
         {
             InitializeComponent();
             txt_status.SelectedIndex = 0;
             txt_stream.SelectedIndex = 0;
+            lbl_header.Text = header;
          }
 
 
@@ -36,6 +37,7 @@ namespace iuiuapplication.Views
                     string exid = MobileConfig.get_exam_settings_id();
                     string examstat = txt_status.SelectedItem.ToString();
                     string stream = txt_stream.SelectedItem.ToString();
+                    Application.Current.Properties["examstat"] = examstat;
                     //await DisplayAlert("EXID ", exid, "OK");
                     try
                     {
@@ -84,7 +86,7 @@ namespace iuiuapplication.Views
             {
 
                 Debug.WriteLine(e);
-                await DisplayAlert("Final Error! ", e.Message, "OK");
+                //await DisplayAlert("Final Error! ", e.Message, "OK");
                 DisplayResults();
             }
         }
@@ -153,6 +155,15 @@ namespace iuiuapplication.Views
                 //lv_view_students.ItemsSource = null;
                 DisplayAlert("Display Error ", "Error! Try again", "OK");
             }
+        }
+
+        private void lv_view_students_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            
+            Model.ExamViewResultsModel item = (Model.ExamViewResultsModel)e.Item;
+            string header = string.Format("{0} :: {1}", item.stud_name, item.stud_reg_no);
+            Navigation.PushAsync(new ExamResultsUpdate(item.Q1Mark,item.Q2Mark, item.Q3Mark, item.Q4Mark, item.Q5Mark, item.Q6Mark, item.Q7Mark, item.Q8Mark, item.Q9Mark,
+                item.Q10Mark, item.examResultsID,header));
         }
     }
 }

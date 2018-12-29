@@ -22,15 +22,16 @@ namespace iuiuapplication.Views
     public partial class StaffExamResults : ContentPage
     {
         private HttpClient _client = new HttpClient();
+        String headerText;
         public StaffExamResults(string cs_code, string course_nm, string sem, string yr, string acad, string prog_id, string sess)
         {
             InitializeComponent();
             try
             {
                 lbl_progheader.Text = prog_id + "  YEAR " + yr + " " + sess;
-            lbl_csheader.Text = "SETTINGS FOR " + course_nm + "\n[" + cs_code + "]";
+                lbl_csheader.Text = "SETTINGS FOR " + course_nm + "\n[" + cs_code + "]";
 
-            LoadExamSettings(Application.Current.Properties["userno"].ToString(), cs_code, sem, yr, acad, prog_id, sess);
+                LoadExamSettings(Application.Current.Properties["userno"].ToString(), cs_code, sem, yr, acad, prog_id, sess);
             }
             catch (Exception ey)
             {
@@ -56,8 +57,8 @@ namespace iuiuapplication.Views
                         GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.Format("DataFinder.aspx?dataFormat=examsettings&empcode={0}&acad={1}&semester={2}" +
                         "&course_id={3}&prog_id={4}&session={5}&intake=-&cyear={6}", username, acad, sem, cs_code, prog_id, sess, yr);
 
-                    
-                   var content = await _client.GetStringAsync(myURL);
+
+                    var content = await _client.GetStringAsync(myURL);
                     //Debug.WriteLine("URL ->  " + myURL);
                     //await DisplayAlert("General Error!  ", "" + myURL, "Ok");
                     //saving our json data locally
@@ -112,6 +113,8 @@ namespace iuiuapplication.Views
             txtTotal.Text = "" + total;
             txtCWPercent.Text = "" + cwk_ratio;
             txtEXPercent.Text = "" + examratio;
+            headerText = string.Format("EXAM MARKSHEET FOR {0} {1} {2}", des_json.progname, des_json.cyear, des_json.studSession, des_json.courseName);
+
 
         }
 
@@ -150,8 +153,8 @@ namespace iuiuapplication.Views
                 string exam_format = "";
                 string noQns = "0";
                 string finalMark = txtTotal.Text;
-               
-         
+
+
                 var url = MobileConfig.GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.
                             Format("DataFinder.aspx?dataFormat=ExamSettingsEdit&acad={0}&semester={1}&course_id={2}" +
                             "&prog_id={3}&intake={4}&sess={5}&cyear={6}&maxQ1={7}&maxQ2={8}&maxQ3={9}" +
@@ -160,7 +163,7 @@ namespace iuiuapplication.Views
                             "maxTotal={20}&EXID={21}&examFormat={22}&empcode={23}",
                             acadYr, sem, course_id, prog_id, intake, sess, cyear
                             , mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9, mark10,
-                            cwk_ratio,examratio,noQns,finalMark,exam_settingsID,exam_format,lecturerID);
+                            cwk_ratio, examratio, noQns, finalMark, exam_settingsID, exam_format, lecturerID);
 
                 Debug.WriteLine("POST : " + url);
 
@@ -194,9 +197,46 @@ namespace iuiuapplication.Views
             var des_json = JsonConvert.DeserializeObject<Model.Examresultssettings>(saved_data);
             string lecturerID = des_json.lecturerID;
             int exam_settingsID = des_json.examSettingsID;
-            MobileConfig.save_exam_settings_id(""+exam_settingsID);
-            await Navigation.PushAsync(new ExamViewSheet());
+            MobileConfig.save_exam_settings_id("" + exam_settingsID);
+            await Navigation.PushAsync(new ExamViewSheet(headerText));
 
+        }
+
+        private async void SubmitResults(object sender, EventArgs e)
+        {
+            await Submission();
+        }
+        private async void WithdWalResults(object sender, EventArgs e)
+        {
+            await Submission();
+        }
+        async Task Submission()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                // retrieving data saved locally and formatting it to JSON object.
+                string saved_data = MobileConfig.get_exam_results().Replace("[", "").Replace("]", "");
+                //deserializing JSON object.
+                Debug.WriteLine("DATA : " + saved_data);
+                var des_json = JsonConvert.DeserializeObject<Model.Examresultssettings>(saved_data);
+                int exam_settingsID = des_json.examSettingsID;
+
+                var url = MobileConfig.GetWebAddress(Application.Current.Properties["campus"].ToString()) + string.
+                            Format("DataFinder.aspx?dataFormat=SubmitExamResults&EXID={0}", exam_settingsID);
+
+                var response = await _client.PostAsync(url, null);
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // set the server reply a message to the Display Alert
+                await DisplayAlert("IUIU Mobile", "" + responseContent, "OK");
+            }
+
+            else
+            {
+                await DisplayAlert("Connection Error!", "sorry, please first connect to the internet.", "Ok");
+
+            }
         }
     }
 }

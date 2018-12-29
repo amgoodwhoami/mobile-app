@@ -26,7 +26,10 @@ namespace iuiuapplication.Views
             }
             else
             {
+                
                 img_profilepic.Source = "no_photo.png";
+                img_profilepic.Source = UriImageSource.FromUri(new Uri(Libraries.MobileConfig.MainCampusStaffPhotolink + Application.Current.Properties["userno"] + "_photo.jpg"));
+
             }
 
             txt_profile_username.Text = "WELCOME  ::  " + users_name.ToUpper();
@@ -47,28 +50,30 @@ namespace iuiuapplication.Views
             {
                 myList.FlowItemsSource = new List<MenuItemModel>
             {
-                    new MenuItemModel("thumb_notifications.png","Notifications"),
+                    new MenuItemModel("thumb_notifications.png","Announcements"),
                     new MenuItemModel("thumb_results.png","My Results"),
                     new MenuItemModel("thumb_register.png","My Registration"),
                     new MenuItemModel("thumb_feespay.png","Fees Payments"),
                     new MenuItemModel("thumb_timetables.png","My Timetables"),
+                    new MenuItemModel("thumb_attendance.png","My Attendance"),
+                    new MenuItemModel("thumb_passout.png","My Passouts"),
                     new MenuItemModel("thumb_coursematerial.png","Course Materials"),
                     new MenuItemModel("thumb_directory.png","Campus Directory"),
-                    new MenuItemModel("thumb_mob_opac.png","Library Catalog")
+                    new MenuItemModel("thumb_mob_opac.png","Library Centre")
             };
             }
             else
             {
                 myList.FlowItemsSource = new List<MenuItemModel>
             {
-                new MenuItemModel("thumb_notifications.png","Notifications"),
+                new MenuItemModel("thumb_notifications.png","Announcements"),
                 new MenuItemModel("thumb_feespay.png","Salary Info"),
                 new MenuItemModel("thumb_timetables.png","My Timetables"),
                 new MenuItemModel("thumb_results.png","Results Centre"),
                 new MenuItemModel("thumb_coursematerial.png","Course Materials"),
                 new MenuItemModel("thumb_directory.png","Campus Directory"),
                 new MenuItemModel("thumb_financials.png","My Claims"),
-                new MenuItemModel("thumb_mob_opac.png","Library Catalog")
+                new MenuItemModel("thumb_mob_opac.png","Library Centre")
             };
 
             }
@@ -107,49 +112,70 @@ namespace iuiuapplication.Views
 
         }
 
-        private void FlowListView_OnFlowItemTapped(object sender, ItemTappedEventArgs e)
+        private async void FlowListView_OnFlowItemTapped(object sender, ItemTappedEventArgs e)
         {
             //DisplayAlert("Tapped", "Item Tapped"+ .ToString(), "ok");
             MenuItemModel Item = (MenuItemModel)e.Item;
             if (Item.menu_label == "My Results")
             {
-               Navigation.PushAsync(new StudentResultCentre(campus_value));
+               await Navigation.PushAsync(new StudentResultCentre(campus_value));
             }
             else if (Item.menu_label == "Salary Info")
             {
-               Navigation.PushAsync(new SalarySummary());
+                await Navigation.PushAsync(new SalarySummary());
             }
             else if (Item.menu_label == "Fees Payments")
             {
-              Navigation.PushAsync(new FeesPaymentInfo());
+                await Navigation.PushAsync(new FeesPaymentInfo());
             }
             else if (Item.menu_label == "My Registration")
             {
-                Navigation.PushAsync(new RegistrationHistory());
+                await Navigation.PushAsync(new RegistrationHistory());
             }
             else if (Item.menu_label == "My Timetables")
             {
-                Navigation.PushAsync(new TimeTables());
+                await Navigation.PushAsync(new TimeTables());
             }
-            else if (Item.menu_label == "Library Catalog")
+            else if (Item.menu_label == "Library Centre")
             {
-                Navigation.PushAsync(new LibraryOPAC());
+                var official = await DisplayActionSheet("IUIU Mobile", "Cancel", "", "View Profile", "Search Catalog");
+                if (official == "View Profile")
+                {
+                    await Navigation.PushAsync(new LibraryOPAC());
+                }
+                else if (official == "Search Catalog")
+                {
+                    await Navigation.PushAsync(new LibraryOPAC());
+                }
+                
             }
             else if (Item.menu_label == "Campus Directory")
             {
-                Navigation.PushAsync(new CampusDirectory());
+                await Navigation.PushAsync(new CampusDirectory());
             }
             else if (Item.menu_label == "My Claims")
             {
-                Navigation.PushAsync(new ClaimingCentre());
+                await Navigation.PushAsync(new ClaimingCentre());
             }
-             else if (Item.menu_label == "Results Centre")
+            else if (Item.menu_label == "Results Centre")
             {
-                Navigation.PushAsync(new TeachingAllocation());
+                await Navigation.PushAsync(new TeachingAllocation());
+            }
+            else if (Item.menu_label == "Course Materials")
+            {
+                await Navigation.PushAsync(new CourseContent());
+            }
+            else if (Item.menu_label == "My Passouts")
+            {
+                await Navigation.PushAsync(new StudentPassouts());
+            }
+            else if (Item.menu_label == "Announcements")
+            {
+                await Navigation.PushAsync(new AnnouncementList());
             }
             else
             {
-                DisplayAlert("IUIU Mobile","Coming in next Version","OK");
+                await DisplayAlert("IUIU Mobile","Coming in next Version","OK");
             }
 
         }
@@ -171,7 +197,8 @@ namespace iuiuapplication.Views
             }
             else
             {
-                img_profilepic.Source = "no_photo.png";
+                img_profilepic.Source = UriImageSource.FromUri(new Uri(Libraries.MobileConfig.MainCampusStaffPhotolink + Application.Current.Properties["userno"] + "_photo.jpg"));
+
             }
             base.OnAppearing();
         }

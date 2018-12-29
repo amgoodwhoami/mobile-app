@@ -38,6 +38,7 @@
     <Compile Include="DB\MyDB.cs" />
     <Compile Include="DB\SQLiteService.cs" />
     <Compile Include="Libraries\MobileConfig.cs" />
+    <Compile Include="Model\AnnouncementModel.cs" />
     <Compile Include="Model\BookModel.cs" />
     <Compile Include="Model\CourseAllocationModel.cs" />
     <Compile Include="Model\CourseAllocationString.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Model\LectureStringModel.cs" />
     <Compile Include="Model\MasterPageItem.cs" />
     <Compile Include="Model\MenuItemModel.cs" />
+    <Compile Include="Model\PassoutModel.cs" />
     <Compile Include="Model\ProgrammeModel.cs" />
     <Compile Include="Model\ProgrammeString.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Model\ResultStringModel.cs" />
     <Compile Include="Model\SalaryDetailsModel.cs" />
     <Compile Include="Model\SalarySummaryModel.cs" />
+    <Compile Include="Model\StudentCourseModel.cs" />
     <Compile Include="Model\StudentCourseworkModel.cs" />
     <Compile Include="Model\StudentResultModel.cs" />
     <Compile Include="Model\StudentSearchModel.cs" />
@@ -70,6 +73,9 @@
     <Compile Include="Model\TimetableModel.cs" />
     <Compile Include="Model\TimetableStringModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Views\AnnouncementList.xaml.cs">
+      <DependentUpon>AnnouncementList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -82,11 +88,20 @@
     <Compile Include="Views\ClaimLectures.xaml.cs">
       <DependentUpon>ClaimLectures.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CourseContent.xaml.cs">
+      <DependentUpon>CourseContent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CourseWorkResults.xaml.cs">
       <DependentUpon>CourseWorkResults.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CourseworkResultSheet.xaml.cs">
       <DependentUpon>CourseworkResultSheet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourseWorkUpdates.xaml.cs">
+      <DependentUpon>CourseWorkUpdates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExamResultsUpdate.xaml.cs">
+      <DependentUpon>ExamResultsUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ExamViewSheet.xaml.cs">
       <DependentUpon>ExamViewSheet.xaml</DependentUpon>
@@ -166,6 +181,9 @@
     </Compile>
     <Compile Include="Views\StudentManageCoursesUnitsTab.xaml.cs">
       <DependentUpon>StudentManageCoursesUnitsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StudentPassouts.xaml.cs">
+      <DependentUpon>StudentPassouts.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentResultCentre.xaml.cs">
       <DependentUpon>StudentResultCentre.xaml</DependentUpon>
@@ -467,6 +485,36 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\CourseworkResultSheet.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CourseWorkUpdates.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AnnouncementList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ExamResultsUpdate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CourseContent.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\StudentPassouts.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iuiuapplication.Views.AnnouncementList" Title="Announcements" BackgroundImage="background_final.png">
+    <StackLayout Orientation="Vertical">
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+        <ListView x:Name="lv_announcements" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame HasShadow="True" Margin="10">
+                        <StackLayout Margin="5" Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+                                <Label x:Name="lbl_date" Text="{Binding title}" Margin="2"  TextColor="Green" FontSize="Small" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                                <Label  Text="{Binding text}" Margin="2" TextColor="Black" FontSize="Small" />
+                                <BoxView HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label  Text="{Binding author}" Margin="2" TextColor="Black" FontSize="Small" FontAttributes="Bold" />
+                                    <Label  Text="{Binding dat, StringFormat='{0:dd MMMM, yyyy}'}" Margin="2" TextColor="Black" FontSize="Small" FontAttributes="Bold,Italic"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    </StackLayout>
+</ContentPage>

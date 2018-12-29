@@ -12,26 +12,53 @@ namespace iuiuapplication.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WebsiteViewer : ContentPage
     {
+        Label ai = new Label();
         public WebsiteViewer(String Address)
         {
             InitializeComponent();
-            try
+            var webView = new WebView
             {
-                var browser = new WebView
-                {
-                    Source = Address,
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
+                Source = Address,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
 
-                this.Content = new StackLayout
-                {
-                    Children = {
-                     browser
-                }
-                };
-            }
-            catch (Exception ex) { DisplayAlert("Error", ex.Message, "OK"); }
+            };
 
+
+
+            // toolbar
+            ToolbarItems.Add(new ToolbarItem("< Back", null, () =>
+            {
+                webView.GoBack();
+            }));
+
+
+            ai.TextColor = Xamarin.Forms.Color.Green;
+            ai.Text = "Loading...Please wait";
+            ai.HorizontalTextAlignment = Xamarin.Forms.TextAlignment.Center;
+            ai.VerticalTextAlignment = Xamarin.Forms.TextAlignment.Center;
+            ai.HeightRequest = 50;
+
+            webView.Navigated += WebView_Navigated;
+            webView.Navigating += WebView_Navigating;
+
+            Content = new StackLayout
+            {
+
+                Children = { ai, webView }
+            };
+
+        }
+
+        private void WebView_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            ai.IsVisible = true;
+        }
+
+        private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            ai.IsVisible = false;
+            //throw new NotImplementedException();
         }
     }
 }

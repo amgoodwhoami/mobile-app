@@ -18,12 +18,8 @@
             </StackLayout>
 
         </StackLayout>
-        <Frame HasShadow="True" Margin="10" Padding="0" CornerRadius="15">
-            <StackLayout Orientation="Horizontal" Margin="0">
-                <Entry x:Name="txtSearch" TextChanged="txtSearch_TextChanged" HorizontalOptions="FillAndExpand" HeightRequest="45"   Placeholder="Search..." Keyboard="Default" FontSize="15" Margin="10,0,0,0"></Entry>
-                <Image WidthRequest="25" x:Name="img_search" Source="search.png" HorizontalOptions="End" Margin="0,0,10,0"></Image>
-            </StackLayout>
-        </Frame>
+        <SearchBar Placeholder="Search..." TextChanged="txtSearch_TextChanged" x:Name="txtSearch" Margin="5,0,5,0"></SearchBar>
+
         <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
         <ListView x:Name="lv_graduands" HasUnevenRows="True" SeparatorVisibility="None" IsPullToRefreshEnabled="True" Refreshing="lv_programmes_Refreshing">
             <ListView.ItemTemplate>

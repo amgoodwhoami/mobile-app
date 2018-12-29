@@ -22,7 +22,8 @@ namespace iuiuapplication.Views
     public partial class StaffCourseworkResults : ContentPage
     {
         private HttpClient _client = new HttpClient();
-        string campus = "Main Campus";
+        string campus = "Main Campus", headerText = "COURSEWORK MARKSHEET FOR BIT 3";
+        int CSID;
 
         public StaffCourseworkResults(string username, string cs_code, string course_nm, string sem, string yr, string acad, string prog, string sess,string camp,string progcode)
         {
@@ -86,7 +87,7 @@ namespace iuiuapplication.Views
                 string saved_data = MobileConfig.get_course_work_settings_json().Replace("[", "").Replace("]", "");
                 //deserializing JSON object.
                 // Debug.WriteLine("DATA : " + saved_data);
-                // DisplayAlert("", "" + saved_data, "Ok");
+                //DisplayAlert("", "" + saved_data, "Ok");
                 var des_json = JsonConvert.DeserializeObject<Model.CourseworkSettings>(saved_data);
                 int cw1 = des_json.cs_maxmark_1;
                 int cw2 = des_json.cs_maxmark_2;
@@ -94,9 +95,12 @@ namespace iuiuapplication.Views
                 int cw4 = des_json.cs_maxmark_4;
                 int cw5 = des_json.cs_maxmark_5;
                 int cyear = des_json.cs_year;
-
+                CSID = des_json.CSID;
+                headerText = string.Format("COURSEWORK MARKSHEET FOR \n{0} {1} {2}", des_json.progname, des_json.cs_year,des_json.cs_session,des_json.cs_courseID);
                 int total = des_json.finalMark;
-
+                txt_compformat.SelectedItem=des_json.compFormat;
+                MobileConfig.set_coursework_compForm(des_json.compFormat);
+                
                 //setting data into entries 
                 txtAss1.Text = "" + cw1;
                 txtAss2.Text = "" + cw2;
@@ -161,7 +165,7 @@ namespace iuiuapplication.Views
                             "&compFormat={16}", acadYr, sem, course_id, prog_id, intake, sess, cyear
                             , assn1, assn2, assn3, Test1, Test2, noTask, finalMark, csid, lecture_id, compFormat);
 
-                await DisplayAlert("","POST : " + url,"OK");
+                //await DisplayAlert("","POST : " + url,"OK");
 
                 var response = await _client.PostAsync(url, null);
 
@@ -176,6 +180,12 @@ namespace iuiuapplication.Views
                 await DisplayAlert("No internet Connection", "sorry, please first connect to the internet.", "Ok");
 
             }
+        }
+
+        private async void ShowCourseworkSheet(object sender, EventArgs e)
+        {
+           // await DisplayAlert("No internet Connection", "CSID " + CSID, "OK");
+            await Navigation.PushAsync(new CourseworkResultSheet(CSID, headerText));
         }
     }
 }

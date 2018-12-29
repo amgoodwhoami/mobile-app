@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iuiuapplication.Views.StaffExamResults"
-             Title="Examinations" BackgroundImage="background_final.png">
-    
-   
+             x:Class="iuiuapplication.Views.ExamResultsUpdate" Title="Exam Results Editor" BackgroundImage="background_final.png">
     <Frame HasShadow="True" Margin="10">
         <ScrollView>
             <StackLayout Margin="5" Orientation="Vertical">
-                <Label x:Name="lbl_progheader" Text="BIT 3, EVENING" Margin="5" TextColor="Black" FontSize="15" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                <Label x:Name="lbl_csheader"  Text="CSC 1101 :: INTRODUCTION TO COMPUTERS 2017/2018, SEMESTER 1" Margin="0" TextColor="Green" FontSize="13" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                <Label x:Name="lbl_header"  Text="CSC 1101 :: INTRODUCTION TO COMPUTERS 2017/2018, SEMESTER 1" Margin="10" TextColor="Green" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
                 <StackLayout Orientation="Vertical">
                     <StackLayout Margin="0" Grid.Row="1" Spacing="10">
                         <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
@@ -66,25 +62,7 @@
                         </StackLayout>
 
 
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="TOTAL:" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
-                            <Entry  x:Name="txtTotal" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="Black" HeightRequest="40"  WidthRequest="70" HorizontalTextAlignment="Center"></Entry>
-
-                        </StackLayout>
-                        
-
-
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="CWK %:" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
-                            <Entry  x:Name="txtCWPercent" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" TextColor="Black" HeightRequest="40"  WidthRequest="70" HorizontalTextAlignment="Center"></Entry>
-
-                            <Label Text="Exam %:" FontAttributes="Bold" Grid.Column="0" VerticalOptions="Center" TextColor="Black" WidthRequest="150"></Label>
-                            <Entry  x:Name="txtEXPercent" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="Black" HeightRequest="40"  WidthRequest="70" HorizontalTextAlignment="Center"></Entry>
-
-                        </StackLayout>
-
                         <BoxView  HeightRequest="1"  BackgroundColor="Green" HorizontalOptions="FillAndExpand" />
-
 
                         <StackLayout Orientation="Horizontal">
                             <Frame HasShadow="True" Margin="0" Padding="5" BackgroundColor="Green" WidthRequest="150">
@@ -97,35 +75,18 @@
                             </Frame>
                             <Frame HasShadow="True" Margin="0" Padding="5" BackgroundColor="Green" WidthRequest="150">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="onViewResultsSheet" NumberOfTapsRequired="1" />
+                                    <TapGestureRecognizer Tapped="CloseForm" NumberOfTapsRequired="1" />
                                 </Frame.GestureRecognizers>
                                 <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="StartAndExpand">
-                                    <Label  Text="RESULTSHEET" Margin="5" HeightRequest="20"  TextColor="White" FontSize="Small" FontAttributes="Bold"/>
+                                    <Label  Text="CLOSE FORM" Margin="5" HeightRequest="20"  TextColor="White" FontSize="Small" FontAttributes="Bold"/>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Frame HasShadow="True" Margin="0" Padding="5" BackgroundColor="Green" WidthRequest="150">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="SubmitResults" NumberOfTapsRequired="1" />
-                                </Frame.GestureRecognizers>
-                                <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="StartAndExpand">
-                                    <Label  Text="SUBMIT RESULTS" Margin="5" HeightRequest="20" TextColor="White" FontSize="Small" FontAttributes="Bold"/>
-                                </StackLayout>
-                            </Frame>
-                            <Frame HasShadow="True" Margin="0" Padding="5" BackgroundColor="Red" WidthRequest="150">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="WithdWalResults" NumberOfTapsRequired="1" />
-                                </Frame.GestureRecognizers>
-                                <StackLayout  HorizontalOptions="Center" Orientation="Horizontal" Margin="0" VerticalOptions="StartAndExpand">
-                                    <Label  Text="WITHDRAW" Margin="5" HeightRequest="20"  TextColor="White" FontSize="Small" FontAttributes="Bold"/>
-                                </StackLayout>
-                            </Frame>
-                        </StackLayout>
+                        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="False" />
+
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
     </Frame>
-
 </ContentPage>

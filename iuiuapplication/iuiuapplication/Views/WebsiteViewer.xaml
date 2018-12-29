@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iuiuapplication.Views.WebsiteViewer" BackgroundImage="background_final.png">
-    <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="True" />
-
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" x:Name="page_loader">
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="App_activity_indicator" Color="#4D7EE1" IsVisible="True" />
+    </StackLayout>
 </ContentPage>

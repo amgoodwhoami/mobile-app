@@ -14,11 +14,12 @@ namespace iuiuapplication.Libraries
         //Local link :192.168.137.1
    
         public static string MainCampuslink = "http://196.43.172.15/Mobile/";
-        public static string MainCampusPhotolink = "https://196.43.172.18/ERP/Academics/studentimages/";
+        public static string MainCampusPhotolink = "http://196.43.172.18/ERP/Academics/studentimages/";
         public static string KampalaCampuslink = "http://196.43.182.5/mobile/";
         public static string KampalaCampusPhotolink = "http://196.43.182.7/ERP/Academics/studentimages/";
         public static string FemalesCampuslink = "http://137.63.131.2:92/Mobile/";
         public static string FemalesCampusPhotolink = "https://137.63.131.2:83/ERP/Academics/studentimages/";
+        public static string MainCampusStaffPhotolink = "http://196.43.172.18/ERP/HumanResource/staff_images/";
 
         public static string GetWebAddress(string campus)
         {
@@ -62,6 +63,16 @@ namespace iuiuapplication.Libraries
            return  Application.Current.Properties["exam_results_sheet"].ToString();
         }
 
+        public static void save_coursework_results_sheet(string json)
+        {
+            Application.Current.Properties["coursework_results_sheet"] = json;
+        }
+
+        public static string get_coursework_results_sheet()
+        {
+            return Application.Current.Properties["coursework_results_sheet"].ToString();
+        }
+
         public static void save_exam_settings_id(string id)
         {
             Application.Current.Properties["exid"] = id;
@@ -69,6 +80,22 @@ namespace iuiuapplication.Libraries
         public static string  get_exam_settings_id()
         {
            return  Application.Current.Properties["exid"].ToString();
+        }
+        public static void save_coursework_settings_id(string id)
+        {
+            Application.Current.Properties["CSID"] = id;
+        }
+        public static string get_coursework_settings_id()
+        {
+            return Application.Current.Properties["CSID"].ToString();
+        }
+        public static void set_coursework_compForm(string compform)
+        {
+            Application.Current.Properties["compForm"] = compform;
+        }
+        public static string get_coursework_compForm()
+        {
+            return Application.Current.Properties["compForm"].ToString();
         }
 
     }
